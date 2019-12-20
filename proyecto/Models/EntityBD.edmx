@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoLab3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="key" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="int" Nullable="false" />
+          <Property Name="hireDate" Type="date" />
+          <Property Name="payDate" Type="date" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="dress" Type="nchar" MaxLength="50" />
+          <Property Name="telephone" Type="nchar" MaxLength="10" />
+          <Property Name="sex" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="documentNumber" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="state" Type="int" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="28" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cant" Type="int" Nullable="false" />
+          <Property Name="price" Type="numeric" Precision="10" Scale="5" Nullable="false" />
+          <Property Name="description" Type="nchar" MaxLength="80" />
+          <Property Name="barcode" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="categorie" Type="nchar" MaxLength="80" />
+          <Property Name="state" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IdSale" />
+          </Key>
+          <Property Name="IdSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPerson" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="summary" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="saleDate" Type="date" Nullable="false" />
+          <Property Name="saleNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="state" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleProducts">
+          <Key>
+            <PropertyRef Name="idSaleProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="idSale" Type="int" Nullable="false" />
+          <Property Name="cant" Type="int" Nullable="false" />
+          <Property Name="summary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="idSaleProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_person_client">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person_employee">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person_employer">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employer" Type="Self.Employer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
+          <End Role="SaleProducts" Type="Self.SaleProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IdSale" />
+            </Principal>
+            <Dependent Role="SaleProducts">
+              <PropertyRef Name="idSale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_employeer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="SaleProducts" Type="Self.SaleProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="SaleProducts">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="reporte_ventas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha1" Type="date" Mode="In" />
+          <Parameter Name="fecha2" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProyectoLab3ModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Code" EntityType="Self.Code" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleProducts" EntityType="Self.SaleProducts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_person_client" Association="Self.fk_person_client">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person_employee" Association="Self.fk_person_employee">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person_employer" Association="Self.fk_person_employer">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_sale" Association="Self.fk_product_sale">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SaleProducts" EntitySet="SaleProducts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_client" Association="Self.fk_sale_client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_employeer" Association="Self.fk_sale_employeer">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_product" Association="Self.fk_sale_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SaleProducts" EntitySet="SaleProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoLab3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProyectoLab3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="ProyectoLab3Model.Client" />
+          <EntitySet Name="Codes" EntityType="ProyectoLab3Model.Code" />
+          <EntitySet Name="Employees" EntityType="ProyectoLab3Model.Employee" />
+          <EntitySet Name="Employers" EntityType="ProyectoLab3Model.Employer" />
+          <EntitySet Name="People" EntityType="ProyectoLab3Model.Person" />
+          <EntitySet Name="Products" EntityType="ProyectoLab3Model.Product" />
+          <EntitySet Name="Sales" EntityType="ProyectoLab3Model.Sale" />
+          <EntitySet Name="SaleProducts" EntityType="ProyectoLab3Model.SaleProduct" />
+          <AssociationSet Name="fk_person_client" Association="ProyectoLab3Model.fk_person_client">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_client" Association="ProyectoLab3Model.fk_sale_client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person_employee" Association="ProyectoLab3Model.fk_person_employee">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person_employer" Association="ProyectoLab3Model.fk_person_employer">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Employer" EntitySet="Employers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_employeer" Association="ProyectoLab3Model.fk_sale_employeer">
+            <End Role="Employer" EntitySet="Employers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sale_product" Association="ProyectoLab3Model.fk_sale_product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SaleProduct" EntitySet="SaleProducts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_sale" Association="ProyectoLab3Model.fk_product_sale">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SaleProduct" EntitySet="SaleProducts" />
+          </AssociationSet>
+          <FunctionImport Name="reporte_ventas" ReturnType="Collection(ProyectoLab3Model.reporte_ventas_Result)">
+            <Parameter Name="fecha1" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="ProyectoLab3Model.fk_person_client" FromRole="Client" ToRole="Person" />
+          <NavigationProperty Name="Sales" Relationship="ProyectoLab3Model.fk_sale_client" FromRole="Client" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="key" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="Int32" Nullable="false" />
+          <Property Name="hireDate" Type="DateTime" Precision="0" />
+          <Property Name="payDate" Type="DateTime" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="ProyectoLab3Model.fk_person_employee" FromRole="Employee" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="ProyectoLab3Model.fk_person_employer" FromRole="Employer" ToRole="Person" />
+          <NavigationProperty Name="Sales" Relationship="ProyectoLab3Model.fk_sale_employeer" FromRole="Employer" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="dress" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="sex" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="documentNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="28" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="ProyectoLab3Model.fk_person_client" FromRole="Person" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="ProyectoLab3Model.fk_person_employee" FromRole="Person" ToRole="Employee" />
+          <NavigationProperty Name="Employer" Relationship="ProyectoLab3Model.fk_person_employer" FromRole="Person" ToRole="Employer" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cant" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="10" Scale="5" />
+          <Property Name="description" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="barcode" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
+          <Property Name="categorie" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SaleProducts" Relationship="ProyectoLab3Model.fk_sale_product" FromRole="Product" ToRole="SaleProduct" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IdSale" />
+          </Key>
+          <Property Name="IdSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="saleDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="saleNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="ProyectoLab3Model.fk_sale_client" FromRole="Sale" ToRole="Client" />
+          <NavigationProperty Name="Employer" Relationship="ProyectoLab3Model.fk_sale_employeer" FromRole="Sale" ToRole="Employer" />
+          <NavigationProperty Name="SaleProducts" Relationship="ProyectoLab3Model.fk_product_sale" FromRole="Sale" ToRole="SaleProduct" />
+        </EntityType>
+        <EntityType Name="SaleProduct">
+          <Key>
+            <PropertyRef Name="idSaleProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="idSale" Type="Int32" Nullable="false" />
+          <Property Name="cant" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="idSaleProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Product" Relationship="ProyectoLab3Model.fk_sale_product" FromRole="SaleProduct" ToRole="Product" />
+          <NavigationProperty Name="Sale" Relationship="ProyectoLab3Model.fk_product_sale" FromRole="SaleProduct" ToRole="Sale" />
+        </EntityType>
+        <Association Name="fk_person_client">
+          <End Type="ProyectoLab3Model.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProyectoLab3Model.Client" Role="Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_client">
+          <End Type="ProyectoLab3Model.Client" Role="Client" Multiplicity="1" />
+          <End Type="ProyectoLab3Model.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person_employee">
+          <End Type="ProyectoLab3Model.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProyectoLab3Model.Employee" Role="Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person_employer">
+          <End Type="ProyectoLab3Model.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProyectoLab3Model.Employer" Role="Employer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_employeer">
+          <End Type="ProyectoLab3Model.Employer" Role="Employer" Multiplicity="1" />
+          <End Type="ProyectoLab3Model.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sale_product">
+          <End Type="ProyectoLab3Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="ProyectoLab3Model.SaleProduct" Role="SaleProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="SaleProduct">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_sale">
+          <End Type="ProyectoLab3Model.Sale" Role="Sale" Multiplicity="1" />
+          <End Type="ProyectoLab3Model.SaleProduct" Role="SaleProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IdSale" />
+            </Principal>
+            <Dependent Role="SaleProduct">
+              <PropertyRef Name="idSale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="reporte_ventas_Result">
+          <Property Type="Decimal" Name="summary" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="saleDate" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="lastName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="firstName1" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="lastName1" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoLab3ModelStoreContainer" CdmEntityContainer="ProyectoLab3Entities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Codes">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Code">
+              <MappingFragment StoreEntitySet="Code">
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="payDate" ColumnName="payDate" />
+                <ScalarProperty Name="hireDate" ColumnName="hireDate" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="documentNumber" ColumnName="documentNumber" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="dress" ColumnName="dress" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="categorie" ColumnName="categorie" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cant" ColumnName="cant" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="saleNumber" ColumnName="saleNumber" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="IdSale" ColumnName="IdSale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleProducts">
+            <EntityTypeMapping TypeName="ProyectoLab3Model.SaleProduct">
+              <MappingFragment StoreEntitySet="SaleProducts">
+                <ScalarProperty Name="idSaleProduct" ColumnName="idSaleProduct" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="cant" ColumnName="cant" />
+                <ScalarProperty Name="idSale" ColumnName="idSale" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="reporte_ventas" FunctionName="ProyectoLab3Model.Store.reporte_ventas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoLab3Model.reporte_ventas_Result">
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName1" ColumnName="firstName1" />
+                <ScalarProperty Name="lastName1" ColumnName="lastName1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

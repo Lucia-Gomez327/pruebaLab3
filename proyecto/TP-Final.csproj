@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5BD30FBE-B96B-486E-9F05-746E3820E045}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>proyecto</RootNamespace>
+    <AssemblyName>proyecto</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Reports\ReporteVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAgregarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAgregarProductos.Designer.cs">
+      <DependentUpon>frmAgregarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAgregarVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAgregarVenta.Designer.cs">
+      <DependentUpon>frmAgregarVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFactura.Designer.cs">
+      <DependentUpon>frmFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmIncioSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmIncioSesion.Designer.cs">
+      <DependentUpon>frmIncioSesion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAgregarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAgregarCliente.Designer.cs">
+      <DependentUpon>frmAgregarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAgregarEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAgregarEmpleado.Designer.cs">
+      <DependentUpon>frmAgregarEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMensajeCodigo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMensajeCodigo.Designer.cs">
+      <DependentUpon>frmMensajeCodigo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmModificarEmpleador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmModificarEmpleador.Designer.cs">
+      <DependentUpon>frmModificarEmpleador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmReport.Designer.cs">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmVentas.Designer.cs">
+      <DependentUpon>frmVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Code.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employer.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityBD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityBD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityBD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityBD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityBD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reporte_ventas_Result.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sale.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SaleProduct.cs">
+      <DependentUpon>EntityBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User Controls\ucEmpleado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ucEmpleado.Designer.cs">
+      <DependentUpon>ucEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reports\ReporteVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVentas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAgregarProductos.resx">
+      <DependentUpon>frmAgregarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAgregarVenta.resx">
+      <DependentUpon>frmAgregarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFactura.resx">
+      <DependentUpon>frmFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmIncioSesion.resx">
+      <DependentUpon>frmIncioSesion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAgregarCliente.resx">
+      <DependentUpon>frmAgregarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAgregarEmpleado.resx">
+      <DependentUpon>frmAgregarEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMensajeCodigo.resx">
+      <DependentUpon>frmMensajeCodigo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmModificarEmpleador.resx">
+      <DependentUpon>frmModificarEmpleador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmReport.resx">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmVentas.resx">
+      <DependentUpon>frmVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ucEmpleado.resx">
+      <DependentUpon>ucEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="Models\EntityBD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityBD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\EntityBD.edmx.diagram">
+      <DependentUpon>EntityBD.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca\Biblioteca.csproj">
+      <Project>{2b561be7-58e5-4406-b339-6e3593a31e3e}</Project>
+      <Name>Biblioteca</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Presentación11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ACEPTAR.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\REGISTRARSE.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\INICIAR.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capture-20181216-230242.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_29231767-stock-illustration-orange-background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FONDO.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_29231767-stock-illustration-orange-background1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %282%291.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %282%292.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %282%293.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %282%294.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %283%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %283%291.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MENU1 - copia %284%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ASD - copia %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ASD - copia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FONDO1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\datos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ajustes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DATOS - copia %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DATOS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DATOS1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DATOS - copia %283%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DATOS - copia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_29231767-stock-illustration-orange-background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AGREGARF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\modificar11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscarr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Diapositiva1.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\REGISTRARSE1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Diapositiva2.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cerrar cesion.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_29231767-stock-illustration-orange-background3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phoenix-logo-vector-design-5a3c31b00e5f48.7862516515138943200589.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kisspng-phoenix-spring-lane-elementary-school-immortality-phoenix-5ac07e88a652d2.7397074115225647446813.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alev-logo-png-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondod.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondod1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aaa.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\EntityBD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityBD.edmx</DependentUpon>
+      <LastGenOutput>EntityBD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EntityBD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityBD.edmx</DependentUpon>
+      <LastGenOutput>EntityBD.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\ACEPTAR.png" />
+    <None Include="Resources\agregar carritos.png" />
+    <None Include="Resources\visualizar.png" />
+    <None Include="Resources\eliminar carrito.png" />
+    <None Include="Resources\REGISTRARSE.png" />
+    <None Include="Resources\INICIAR1.jpg" />
+    <None Include="Resources\boton_rojo.png" />
+    <None Include="Resources\boton_rojo.bmp" />
+    <None Include="Resources\boton cerrar.png" />
+    <None Include="Resources\BARRA - copia.png" />
+    <None Include="Resources\FILTRO.png" />
+    <None Include="Resources\filtrar1.png" />
+    <None Include="Resources\filtrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

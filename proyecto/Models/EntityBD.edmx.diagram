@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6162d8c31dfb46bea22ab09ff8249367" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoLab3Model.Client" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Code" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Employee" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Employer" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Person" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Product" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.Sale" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="ProyectoLab3Model.SaleProduct" Width="1.5" PointX="7.5" PointY="6.125" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_person_client" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_sale_client" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_person_employee" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_person_employer" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_sale_employeer" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_sale_product" />
+        <AssociationConnector Association="ProyectoLab3Model.fk_product_sale" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
