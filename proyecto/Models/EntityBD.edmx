@@ -25,7 +25,7 @@
           <Property Name="IdPerson" Type="int" Nullable="false" />
           <Property Name="hireDate" Type="date" />
           <Property Name="payDate" Type="date" />
-          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="5" />
           <Property Name="password" Type="nvarchar" MaxLength="50" />
           <Property Name="userName" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -60,7 +60,7 @@
           <Property Name="cant" Type="int" Nullable="false" />
           <Property Name="price" Type="numeric" Precision="10" Scale="5" Nullable="false" />
           <Property Name="description" Type="nchar" MaxLength="80" />
-          <Property Name="barcode" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="barcode" Type="nchar" MaxLength="8" Nullable="false" />
           <Property Name="categorie" Type="nchar" MaxLength="80" />
           <Property Name="state" Type="int" Nullable="false" />
         </EntityType>
@@ -224,6 +224,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoLab3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProyectoLab3Entities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="reporte_ventas" ReturnType="Collection(ProyectoLab3Model.reporte_ventas_Result)">
+            <Parameter Name="fecha1" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha2" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="Clients" EntityType="ProyectoLab3Model.Client" />
           <EntitySet Name="Codes" EntityType="ProyectoLab3Model.Code" />
           <EntitySet Name="Employees" EntityType="ProyectoLab3Model.Employee" />
@@ -260,11 +264,15 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SaleProduct" EntitySet="SaleProducts" />
           </AssociationSet>
-          <FunctionImport Name="reporte_ventas" ReturnType="Collection(ProyectoLab3Model.reporte_ventas_Result)">
-            <Parameter Name="fecha1" Mode="In" Type="DateTime" />
-            <Parameter Name="fecha2" Mode="In" Type="DateTime" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="reporte_ventas_Result">
+          <Property Type="Decimal" Name="summary" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="saleDate" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="lastName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="firstName1" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="lastName1" Nullable="false" MaxLength="30" />
+        </ComplexType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="idPerson" />
@@ -287,7 +295,7 @@
           <Property Name="IdPerson" Type="Int32" Nullable="false" />
           <Property Name="hireDate" Type="DateTime" Precision="0" />
           <Property Name="payDate" Type="DateTime" Precision="0" />
-          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Person" Relationship="ProyectoLab3Model.fk_person_employee" FromRole="Employee" ToRole="Person" />
@@ -328,7 +336,7 @@
           <Property Name="cant" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Decimal" Nullable="false" Precision="10" Scale="5" />
           <Property Name="description" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
-          <Property Name="barcode" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
+          <Property Name="barcode" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
           <Property Name="categorie" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
           <Property Name="state" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SaleProducts" Relationship="ProyectoLab3Model.fk_sale_product" FromRole="Product" ToRole="SaleProduct" />
@@ -451,20 +459,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="reporte_ventas_Result">
-          <Property Type="Decimal" Name="summary" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="saleDate" Nullable="false" />
-          <Property Type="String" Name="firstName" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="lastName" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="firstName1" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="lastName1" Nullable="false" MaxLength="30" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProyectoLab3ModelStoreContainer" CdmEntityContainer="ProyectoLab3Entities">
+          <FunctionImportMapping FunctionImportName="reporte_ventas" FunctionName="ProyectoLab3Model.Store.reporte_ventas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoLab3Model.reporte_ventas_Result">
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName1" ColumnName="firstName1" />
+                <ScalarProperty Name="lastName1" ColumnName="lastName1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="ProyectoLab3Model.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -555,18 +567,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="reporte_ventas" FunctionName="ProyectoLab3Model.Store.reporte_ventas">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoLab3Model.reporte_ventas_Result">
-                <ScalarProperty Name="summary" ColumnName="summary" />
-                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName1" ColumnName="firstName1" />
-                <ScalarProperty Name="lastName1" ColumnName="lastName1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

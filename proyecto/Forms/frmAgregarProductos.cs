@@ -37,7 +37,7 @@ namespace proyecto
         {
             InitializeComponent();
             
-            dbContext = new Models.ProyectoLab3Entities();
+            
             btnCargar.Visible = false;
             tbCodigoDeBarras.ReadOnly = true;
             tbCategoria.ReadOnly = true;
@@ -63,7 +63,8 @@ namespace proyecto
         private void frmAgregarProductos_Load(object sender, EventArgs e)
         {
             tbCodigoDeBarras.MaxLength = 8;
-            
+            dbContext = new Models.ProyectoLab3Entities();
+
         }
         /////// procedimientos /////
         
@@ -100,10 +101,10 @@ namespace proyecto
                
                 try
                 {
-
-                var resProduct = from product in dbContext.Products where product.barcode == Convert.ToDecimal(tbCodigoDeBarras) select product;
-               
-                if (resProduct != null )
+                var resProduct = from product in dbContext.Products where product.barcode == tbCodigoDeBarras.Text select product;
+                oProduct = null;       
+                oProduct = resProduct.ToList().Find(x => x.barcode == tbCodigoDeBarras.Text);
+                if (oProduct != null )
                 {
                     return true;
                 }
@@ -127,7 +128,7 @@ namespace proyecto
             {
                 MessageBox.Show("Rellene todos los campos", "Aviso ", MessageBoxButtons.OK);
             }
-            else if(tbCodigoDeBarras.TextLength == 8)
+            else if(tbCodigoDeBarras.TextLength == 10)
             {
                 MessageBox.Show("Codigo de Barra invalido", "Aviso ", MessageBoxButtons.OK);
                 tbCodigoDeBarras.Focus();
@@ -151,7 +152,7 @@ namespace proyecto
                         cant = Convert.ToInt32(nudCantidadProductos.Value),
                         price = Convert.ToInt32(tbPrecio.Text),
                         description = tbDescripcion.Text,
-                        barcode = Convert.ToInt32(tbCodigoDeBarras.Text),
+                        barcode = tbCodigoDeBarras.Text,
                         categorie = tbCategoria.Text,
                         state = 1
                 };

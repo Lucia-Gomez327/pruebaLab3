@@ -225,6 +225,7 @@
             // tbEmailCliente
             // 
             this.tbEmailCliente.Location = new System.Drawing.Point(219, 192);
+            this.tbEmailCliente.MaxLength = 50;
             this.tbEmailCliente.Name = "tbEmailCliente";
             this.tbEmailCliente.Size = new System.Drawing.Size(275, 22);
             this.tbEmailCliente.TabIndex = 37;
@@ -232,6 +233,7 @@
             // tbTelefonoCliente
             // 
             this.tbTelefonoCliente.Location = new System.Drawing.Point(219, 276);
+            this.tbTelefonoCliente.MaxLength = 10;
             this.tbTelefonoCliente.Name = "tbTelefonoCliente";
             this.tbTelefonoCliente.Size = new System.Drawing.Size(275, 22);
             this.tbTelefonoCliente.TabIndex = 38;
@@ -283,6 +285,7 @@
             // tbDireccionCliente
             // 
             this.tbDireccionCliente.Location = new System.Drawing.Point(219, 234);
+            this.tbDireccionCliente.MaxLength = 50;
             this.tbDireccionCliente.Name = "tbDireccionCliente";
             this.tbDireccionCliente.Size = new System.Drawing.Size(275, 22);
             this.tbDireccionCliente.TabIndex = 50;
@@ -290,6 +293,7 @@
             // tbNombreCliente
             // 
             this.tbNombreCliente.Location = new System.Drawing.Point(219, 18);
+            this.tbNombreCliente.MaxLength = 30;
             this.tbNombreCliente.Name = "tbNombreCliente";
             this.tbNombreCliente.Size = new System.Drawing.Size(275, 22);
             this.tbNombreCliente.TabIndex = 43;
@@ -297,6 +301,7 @@
             // tbApellidoCliente
             // 
             this.tbApellidoCliente.Location = new System.Drawing.Point(219, 60);
+            this.tbApellidoCliente.MaxLength = 30;
             this.tbApellidoCliente.Name = "tbApellidoCliente";
             this.tbApellidoCliente.Size = new System.Drawing.Size(275, 22);
             this.tbApellidoCliente.TabIndex = 44;

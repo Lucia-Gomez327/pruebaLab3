@@ -24,7 +24,7 @@ namespace proyecto.Models
         public int cant { get; set; }
         public decimal price { get; set; }
         public string description { get; set; }
-        public decimal barcode { get; set; }
+        public string barcode { get; set; }
         public string categorie { get; set; }
         public int state { get; set; }
     

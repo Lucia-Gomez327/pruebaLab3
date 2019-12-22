@@ -226,6 +226,7 @@
             // tbDireccion
             // 
             this.tbDireccion.Location = new System.Drawing.Point(259, 259);
+            this.tbDireccion.MaxLength = 50;
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(245, 22);
             this.tbDireccion.TabIndex = 54;
@@ -255,6 +256,7 @@
             // tbApellido
             // 
             this.tbApellido.Location = new System.Drawing.Point(259, 61);
+            this.tbApellido.MaxLength = 30;
             this.tbApellido.Name = "tbApellido";
             this.tbApellido.Size = new System.Drawing.Size(245, 22);
             this.tbApellido.TabIndex = 44;
@@ -262,6 +264,7 @@
             // tbNombre
             // 
             this.tbNombre.Location = new System.Drawing.Point(259, 28);
+            this.tbNombre.MaxLength = 30;
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(245, 22);
             this.tbNombre.TabIndex = 43;
@@ -339,6 +342,7 @@
             // tbTelefono
             // 
             this.tbTelefono.Location = new System.Drawing.Point(259, 292);
+            this.tbTelefono.MaxLength = 10;
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(245, 22);
             this.tbTelefono.TabIndex = 55;
@@ -346,6 +350,7 @@
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(259, 226);
+            this.tbEmail.MaxLength = 50;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(245, 22);
             this.tbEmail.TabIndex = 53;
@@ -376,15 +381,16 @@
             // 
             this.tbClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClave.Location = new System.Drawing.Point(259, 191);
+            this.tbClave.MaxLength = 50;
             this.tbClave.Name = "tbClave";
             this.tbClave.Size = new System.Drawing.Size(245, 24);
             this.tbClave.TabIndex = 50;
             this.tbClave.Click += new System.EventHandler(this.tbClaveNuevo_Click);
-            
             // 
             // tbNombreUsuario
             // 
             this.tbNombreUsuario.Location = new System.Drawing.Point(259, 158);
+            this.tbNombreUsuario.MaxLength = 50;
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(245, 22);
             this.tbNombreUsuario.TabIndex = 48;
@@ -452,10 +458,8 @@
             this.pnlVisualizar.Name = "pnlVisualizar";
             this.pnlVisualizar.Size = new System.Drawing.Size(27, 33);
             this.pnlVisualizar.TabIndex = 77;
-            
             this.pnlVisualizar.MouseEnter += new System.EventHandler(this.pnlVisualizar_MouseEnter);
             this.pnlVisualizar.MouseLeave += new System.EventHandler(this.pnlVisualizar_MouseLeave);
-            
             // 
             // pnlClave
             // 
@@ -526,6 +530,7 @@
             // 
             this.tbConfirmacionClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbConfirmacionClave.Location = new System.Drawing.Point(182, 97);
+            this.tbConfirmacionClave.MaxLength = 50;
             this.tbConfirmacionClave.Name = "tbConfirmacionClave";
             this.tbConfirmacionClave.Size = new System.Drawing.Size(245, 24);
             this.tbConfirmacionClave.TabIndex = 3;
@@ -535,6 +540,7 @@
             // 
             this.tbClaveNueva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClaveNueva.Location = new System.Drawing.Point(182, 53);
+            this.tbClaveNueva.MaxLength = 50;
             this.tbClaveNueva.Name = "tbClaveNueva";
             this.tbClaveNueva.Size = new System.Drawing.Size(245, 24);
             this.tbClaveNueva.TabIndex = 2;
@@ -566,6 +572,7 @@
             // 
             this.tbClaveActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClaveActual.Location = new System.Drawing.Point(182, 8);
+            this.tbClaveActual.MaxLength = 50;
             this.tbClaveActual.Name = "tbClaveActual";
             this.tbClaveActual.Size = new System.Drawing.Size(245, 24);
             this.tbClaveActual.TabIndex = 1;

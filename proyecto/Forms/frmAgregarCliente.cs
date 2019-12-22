@@ -17,7 +17,7 @@ namespace proyecto
         Models.ProyectoLab3Entities dbContext;
         Models.Client oClient;
         Models.Person oPerson;
-        //hola
+       
         
         // constructor predeterminado
         public frmAgregarCliente()

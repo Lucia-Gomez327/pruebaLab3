@@ -47,7 +47,6 @@
             this.tbDescripcion = new System.Windows.Forms.TextBox();
             this.btnVolverInicio = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pnlAgregarCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadProductos)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +58,7 @@
             this.btnModificar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(513, 389);
+            this.btnModificar.Location = new System.Drawing.Point(513, 444);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(103, 43);
             this.btnModificar.TabIndex = 9;
@@ -95,12 +94,12 @@
             this.pnlAgregarCliente.Controls.Add(this.tbDescripcion);
             this.pnlAgregarCliente.Location = new System.Drawing.Point(101, 82);
             this.pnlAgregarCliente.Name = "pnlAgregarCliente";
-            this.pnlAgregarCliente.Size = new System.Drawing.Size(515, 301);
+            this.pnlAgregarCliente.Size = new System.Drawing.Size(515, 356);
             this.pnlAgregarCliente.TabIndex = 70;
             // 
             // nudCantidadProductos
             // 
-            this.nudCantidadProductos.Location = new System.Drawing.Point(207, 153);
+            this.nudCantidadProductos.Location = new System.Drawing.Point(207, 213);
             this.nudCantidadProductos.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -114,7 +113,7 @@
             // 
             this.rbBajaProducto.AutoSize = true;
             this.rbBajaProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBajaProducto.Location = new System.Drawing.Point(323, 258);
+            this.rbBajaProducto.Location = new System.Drawing.Point(323, 305);
             this.rbBajaProducto.Name = "rbBajaProducto";
             this.rbBajaProducto.Size = new System.Drawing.Size(61, 21);
             this.rbBajaProducto.TabIndex = 7;
@@ -126,7 +125,7 @@
             // 
             this.rbAltaProducto.AutoSize = true;
             this.rbAltaProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAltaProducto.Location = new System.Drawing.Point(207, 258);
+            this.rbAltaProducto.Location = new System.Drawing.Point(207, 305);
             this.rbAltaProducto.Name = "rbAltaProducto";
             this.rbAltaProducto.Size = new System.Drawing.Size(57, 21);
             this.rbAltaProducto.TabIndex = 6;
@@ -139,7 +138,7 @@
             this.lblAltaBajaProductos.AutoSize = true;
             this.lblAltaBajaProductos.BackColor = System.Drawing.Color.Transparent;
             this.lblAltaBajaProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAltaBajaProductos.Location = new System.Drawing.Point(79, 259);
+            this.lblAltaBajaProductos.Location = new System.Drawing.Point(79, 310);
             this.lblAltaBajaProductos.Name = "lblAltaBajaProductos";
             this.lblAltaBajaProductos.Size = new System.Drawing.Size(84, 18);
             this.lblAltaBajaProductos.TabIndex = 52;
@@ -158,14 +157,16 @@
             // 
             // tbCategoria
             // 
-            this.tbCategoria.Location = new System.Drawing.Point(207, 112);
+            this.tbCategoria.Location = new System.Drawing.Point(207, 167);
+            this.tbCategoria.MaxLength = 80;
             this.tbCategoria.Name = "tbCategoria";
             this.tbCategoria.Size = new System.Drawing.Size(247, 22);
             this.tbCategoria.TabIndex = 3;
             // 
             // tbPrecio
             // 
-            this.tbPrecio.Location = new System.Drawing.Point(207, 207);
+            this.tbPrecio.Location = new System.Drawing.Point(207, 259);
+            this.tbPrecio.MaxLength = 10;
             this.tbPrecio.Name = "tbPrecio";
             this.tbPrecio.Size = new System.Drawing.Size(247, 22);
             this.tbPrecio.TabIndex = 5;
@@ -175,7 +176,7 @@
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.BackColor = System.Drawing.Color.Transparent;
             this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.Location = new System.Drawing.Point(92, 209);
+            this.lblPrecio.Location = new System.Drawing.Point(92, 262);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(71, 18);
             this.lblPrecio.TabIndex = 36;
@@ -186,7 +187,7 @@
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.BackColor = System.Drawing.Color.Transparent;
             this.lblCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoria.Location = new System.Drawing.Point(82, 108);
+            this.lblCategoria.Location = new System.Drawing.Point(82, 166);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(81, 18);
             this.lblCategoria.TabIndex = 35;
@@ -197,7 +198,7 @@
             this.lblCantidad.AutoSize = true;
             this.lblCantidad.BackColor = System.Drawing.Color.Transparent;
             this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.Location = new System.Drawing.Point(89, 158);
+            this.lblCantidad.Location = new System.Drawing.Point(89, 214);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(74, 18);
             this.lblCantidad.TabIndex = 49;
@@ -217,15 +218,18 @@
             // tbCodigoDeBarras
             // 
             this.tbCodigoDeBarras.Location = new System.Drawing.Point(207, 14);
+            this.tbCodigoDeBarras.MaxLength = 8;
             this.tbCodigoDeBarras.Name = "tbCodigoDeBarras";
             this.tbCodigoDeBarras.Size = new System.Drawing.Size(247, 22);
             this.tbCodigoDeBarras.TabIndex = 1;
             // 
             // tbDescripcion
             // 
-            this.tbDescripcion.Location = new System.Drawing.Point(207, 62);
+            this.tbDescripcion.Location = new System.Drawing.Point(207, 60);
+            this.tbDescripcion.MaxLength = 80;
+            this.tbDescripcion.Multiline = true;
             this.tbDescripcion.Name = "tbDescripcion";
-            this.tbDescripcion.Size = new System.Drawing.Size(247, 22);
+            this.tbDescripcion.Size = new System.Drawing.Size(247, 83);
             this.tbDescripcion.TabIndex = 2;
             // 
             // btnVolverInicio
@@ -235,7 +239,7 @@
             this.btnVolverInicio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnVolverInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolverInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolverInicio.Location = new System.Drawing.Point(268, 389);
+            this.btnVolverInicio.Location = new System.Drawing.Point(268, 444);
             this.btnVolverInicio.Name = "btnVolverInicio";
             this.btnVolverInicio.Size = new System.Drawing.Size(103, 43);
             this.btnVolverInicio.TabIndex = 10;
@@ -249,16 +253,12 @@
             this.btnCargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCargar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargar.Location = new System.Drawing.Point(393, 389);
+            this.btnCargar.Location = new System.Drawing.Point(393, 444);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(103, 43);
             this.btnCargar.TabIndex = 8;
             this.btnCargar.UseVisualStyleBackColor = false;
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // frmAgregarProductos
             // 
@@ -297,7 +297,6 @@
         private System.Windows.Forms.TextBox tbDescripcion;
         private System.Windows.Forms.Button btnVolverInicio;
         private System.Windows.Forms.Button btnCargar;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblAltaBajaProductos;
         private System.Windows.Forms.RadioButton rbBajaProducto;
         private System.Windows.Forms.RadioButton rbAltaProducto;

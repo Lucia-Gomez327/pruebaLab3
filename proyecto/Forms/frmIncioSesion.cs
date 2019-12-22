@@ -27,7 +27,8 @@ namespace proyecto
         Models.Employer oEmpleador;
         Models.Person oPerson;
         static bool cod;
-        
+        ToolTip tp1;
+
 
         // Contructor
         public frmIncioSesion()
@@ -38,6 +39,8 @@ namespace proyecto
         //LOAD FORMULARIO
         private void Form1_Load(object sender, EventArgs e)
         {
+            tp1 = new System.Windows.Forms.ToolTip();
+            tp1.SetToolTip(pnlVisualizar, "Ver Clave");
             ucInicio.Visible = false;
             tbNombreUsuario.Focus();           
             tbClave.PasswordChar = '*';
@@ -270,6 +273,19 @@ namespace proyecto
         private void ucInicio_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pnlVisualizar_MouseEnter(object sender, EventArgs e)
+        {
+            tbClave.PasswordChar = '\0';
+           
+            tp1.SetToolTip(pnlVisualizar, "Ocultar Claves");
+        }
+
+        private void pnlVisualizar_MouseLeave(object sender, EventArgs e)
+        {
+            tbClave.PasswordChar = '*';
+            tp1.SetToolTip(pnlVisualizar, "Ver Claves");
         }
     }
 }
