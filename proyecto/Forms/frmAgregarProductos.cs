@@ -103,7 +103,7 @@ namespace proyecto
                 {
                 var resProduct = from product in dbContext.Products where product.barcode == tbCodigoDeBarras.Text select product;
                 oProduct = null;       
-                oProduct = resProduct.ToList().Find(x => x.barcode == tbCodigoDeBarras.Text);
+                oProduct = resProduct.ToList().Find(x => x.barcode.Trim() == tbCodigoDeBarras.Text);
                 if (oProduct != null )
                 {
                     return true;
