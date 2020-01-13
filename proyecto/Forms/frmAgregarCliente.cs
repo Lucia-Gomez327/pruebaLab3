@@ -18,7 +18,7 @@ namespace proyecto
         Models.Client oClient;
         Models.Person oPerson;
        
-        //hola
+        //qweqweqew
         // constructor predeterminado
         public frmAgregarCliente()
         {
