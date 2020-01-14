@@ -25,9 +25,9 @@ namespace proyecto.Forms
         private void frmModificarEmpleador_Load(object sender, EventArgs e)
         {
             tp1 = new System.Windows.Forms.ToolTip();
-            tp1.SetToolTip(pnlVisualizar, "Ver Clave");
+
             tbClave.PasswordChar = '*';
-                      
+            tp1.SetToolTip(pnlVisualizar, "Ver Clave");           
             pnlClave.Visible = false;
             tbClave.ReadOnly = true;
             tbApellido.Text = oPerson.firstName;

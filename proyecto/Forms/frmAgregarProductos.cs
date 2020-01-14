@@ -31,13 +31,14 @@ namespace proyecto
             rbBajaProducto.Visible = false;
             tbCodigoDeBarras.ReadOnly = false;
             tbCategoria.ReadOnly = false;
+            dbContext = new Models.ProyectoLab3Entities();
         }
         // constructor 1
         public frmAgregarProductos(int id)
         {
             InitializeComponent();
-            
-            
+
+            dbContext = new Models.ProyectoLab3Entities();
             btnCargar.Visible = false;
             tbCodigoDeBarras.ReadOnly = true;
             tbCategoria.ReadOnly = true;
@@ -46,13 +47,14 @@ namespace proyecto
             tbDescripcion.Text = oProduct.description;
             tbCategoria.Text = oProduct.categorie;
             tbPrecio.Text = Convert.ToString(oProduct.price);
+            nudCantidadProductos.Value = oProduct.cant;
             if (oProduct.state == 1)
             {
                 rbAltaProducto.Checked = true;
             }
             else
             {
-                rbBajaProducto.Checked = false;
+                rbBajaProducto.Checked = true;
             }
             //nudCantidadProductos.Value = oProduct.cant;
 
@@ -63,7 +65,7 @@ namespace proyecto
         private void frmAgregarProductos_Load(object sender, EventArgs e)
         {
             tbCodigoDeBarras.MaxLength = 8;
-            dbContext = new Models.ProyectoLab3Entities();
+           
 
         }
         /////// procedimientos /////
@@ -97,13 +99,15 @@ namespace proyecto
 
         private bool searchCodeBar()
         {
-            oProduct = new Models.Product();    
+            oProduct = new Models.Product();
+            
+            try
+            {
+
+                var resProduct = from product in dbContext.Products where product.barcode.ToString() == tbCodigoDeBarras.Text select product;
+
+                oProduct = resProduct.ToList().Find(x => x.barcode.ToString() ==tbCodigoDeBarras.Text);
                
-                try
-                {
-                var resProduct = from product in dbContext.Products where product.barcode == tbCodigoDeBarras.Text select product;
-                oProduct = null;       
-                oProduct = resProduct.ToList().Find(x => x.barcode.Trim() == tbCodigoDeBarras.Text);
                 if (oProduct != null )
                 {
                     return true;
@@ -128,7 +132,7 @@ namespace proyecto
             {
                 MessageBox.Show("Rellene todos los campos", "Aviso ", MessageBoxButtons.OK);
             }
-            else if(tbCodigoDeBarras.TextLength == 10)
+            else if(tbCodigoDeBarras.TextLength < 8)
             {
                 MessageBox.Show("Codigo de Barra invalido", "Aviso ", MessageBoxButtons.OK);
                 tbCodigoDeBarras.Focus();
@@ -152,7 +156,7 @@ namespace proyecto
                         cant = Convert.ToInt32(nudCantidadProductos.Value),
                         price = Convert.ToInt32(tbPrecio.Text),
                         description = tbDescripcion.Text,
-                        barcode = tbCodigoDeBarras.Text,
+                        barcode = Convert.ToInt32(tbCodigoDeBarras.Text),
                         categorie = tbCategoria.Text,
                         state = 1
                 };
@@ -166,7 +170,7 @@ namespace proyecto
                 tbCodigoDeBarras.Clear();
                 tbDescripcion.Clear();
                 tbPrecio.Clear();
-
+                nudCantidadProductos.Value = 0;
                 }
                 catch(DbEntityValidationException ex)
                 {

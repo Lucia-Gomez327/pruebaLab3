@@ -16,6 +16,8 @@ namespace proyecto
         frmAgregarVenta agregarVenta;
         frmAgregarProductos agregarProductos;
         proyecto.Forms.frmVentas frmVentas;
+        
+
 
         int indice;
         int panelBusqueda;
@@ -29,7 +31,7 @@ namespace proyecto
 
         // Constructor
 
-        
+
         public frmMenu(int id)
         {
             InitializeComponent();
@@ -676,7 +678,7 @@ namespace proyecto
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DateTime fi = new DateTime(2019,12,18);
+            DateTime fi = new DateTime(2019, 12, 18);
             DateTime ff = new DateTime(2019, 12, 19);
             Forms.frmReport reporte = new Forms.frmReport();
             reporte.fechaIni = fi;

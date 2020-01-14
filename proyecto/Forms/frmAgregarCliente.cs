@@ -11,13 +11,13 @@ using System.IO;
 using Biblioteca;
 
 namespace proyecto
-{//hola
+{
     public partial class frmAgregarCliente : Form
     {       
         Models.ProyectoLab3Entities dbContext;
         Models.Client oClient;
         Models.Person oPerson;
-       
+        //Luci, fijate que onda dale
         
         // constructor predeterminado
         public frmAgregarCliente()
@@ -47,15 +47,15 @@ namespace proyecto
             tbEmailCliente.Text = oPerson.email;
             tbDireccionCliente.Text = oPerson.dress;
             tbTelefonoCliente.Text = oPerson.telephone;
-            cboTipoDni.SelectedItem = oPerson.type;
-            cbSexo.SelectedItem = oPerson.sex;
+            cboTipoDni.SelectedItem = oPerson.type.Trim();
+            cbSexo.SelectedItem = oPerson.sex.Trim();
             if (oPerson.state == 1)
             {
                 rbAltaCliente.Checked = true;
             }
             else
             {
-                rbBajaCliente.Checked = false;
+                rbBajaCliente.Checked = true;
             }
 
 

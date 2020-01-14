@@ -42,7 +42,6 @@
             this.btnRegistrarse = new System.Windows.Forms.Button();
             this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.pbFondo = new System.Windows.Forms.PictureBox();
-            this.pnlVisualizar = new System.Windows.Forms.Panel();
             this.pnlFondo.SuspendLayout();
             this.pnlIniciarSesion.SuspendLayout();
             this.pnlInicio1.SuspendLayout();
@@ -57,13 +56,12 @@
             this.pnlFondo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFondo.Location = new System.Drawing.Point(0, 0);
             this.pnlFondo.Name = "pnlFondo";
-            this.pnlFondo.Size = new System.Drawing.Size(539, 500);
+            this.pnlFondo.Size = new System.Drawing.Size(534, 500);
             this.pnlFondo.TabIndex = 1;
             // 
             // ucInicio
             // 
-            this.ucInicio.BackColor = System.Drawing.Color.Transparent;
-            this.ucInicio.Location = new System.Drawing.Point(12, 12);
+            this.ucInicio.Location = new System.Drawing.Point(12, 21);
             this.ucInicio.Name = "ucInicio";
             this.ucInicio.Size = new System.Drawing.Size(506, 457);
             this.ucInicio.TabIndex = 9;
@@ -81,7 +79,7 @@
             this.pnlIniciarSesion.Controls.Add(this.btnIniciarSesion);
             this.pnlIniciarSesion.Location = new System.Drawing.Point(40, 45);
             this.pnlIniciarSesion.Name = "pnlIniciarSesion";
-            this.pnlIniciarSesion.Size = new System.Drawing.Size(449, 265);
+            this.pnlIniciarSesion.Size = new System.Drawing.Size(427, 265);
             this.pnlIniciarSesion.TabIndex = 7;
             // 
             // pnlInicio1
@@ -90,7 +88,6 @@
             this.pnlInicio1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlInicio1.BackgroundImage")));
             this.pnlInicio1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlInicio1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlInicio1.Controls.Add(this.pnlVisualizar);
             this.pnlInicio1.Controls.Add(this.cbTipoUsuario);
             this.pnlInicio1.Controls.Add(this.lblTipo);
             this.pnlInicio1.Controls.Add(this.lblNombreUsuario);
@@ -99,7 +96,7 @@
             this.pnlInicio1.Controls.Add(this.lblClave);
             this.pnlInicio1.Location = new System.Drawing.Point(8, 15);
             this.pnlInicio1.Name = "pnlInicio1";
-            this.pnlInicio1.Size = new System.Drawing.Size(423, 131);
+            this.pnlInicio1.Size = new System.Drawing.Size(409, 131);
             this.pnlInicio1.TabIndex = 9;
             // 
             // cbTipoUsuario
@@ -138,7 +135,6 @@
             // tbNombreUsuario
             // 
             this.tbNombreUsuario.Location = new System.Drawing.Point(155, 24);
-            this.tbNombreUsuario.MaxLength = 50;
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(237, 22);
             this.tbNombreUsuario.TabIndex = 4;
@@ -147,7 +143,6 @@
             // 
             this.tbClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClave.Location = new System.Drawing.Point(155, 57);
-            this.tbClave.MaxLength = 50;
             this.tbClave.Name = "tbClave";
             this.tbClave.Size = new System.Drawing.Size(237, 24);
             this.tbClave.TabIndex = 5;
@@ -198,28 +193,16 @@
             this.pbFondo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbFondo.InitialImage")));
             this.pbFondo.Location = new System.Drawing.Point(0, 0);
             this.pbFondo.Name = "pbFondo";
-            this.pbFondo.Size = new System.Drawing.Size(539, 500);
+            this.pbFondo.Size = new System.Drawing.Size(534, 500);
             this.pbFondo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFondo.TabIndex = 0;
             this.pbFondo.TabStop = false;
-            // 
-            // pnlVisualizar
-            // 
-            this.pnlVisualizar.BackColor = System.Drawing.Color.Transparent;
-            this.pnlVisualizar.BackgroundImage = global::proyecto.Properties.Resources.visualizar;
-            this.pnlVisualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlVisualizar.Location = new System.Drawing.Point(395, 53);
-            this.pnlVisualizar.Name = "pnlVisualizar";
-            this.pnlVisualizar.Size = new System.Drawing.Size(27, 33);
-            this.pnlVisualizar.TabIndex = 78;
-            this.pnlVisualizar.MouseEnter += new System.EventHandler(this.pnlVisualizar_MouseEnter);
-            this.pnlVisualizar.MouseLeave += new System.EventHandler(this.pnlVisualizar_MouseLeave);
             // 
             // frmIncioSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 500);
+            this.ClientSize = new System.Drawing.Size(534, 500);
             this.Controls.Add(this.pnlFondo);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1000, 700);
@@ -252,7 +235,6 @@
         private System.Windows.Forms.ComboBox cbTipoUsuario;
         private System.Windows.Forms.Label lblTipo;
         private UserControl1 ucInicio;
-        private System.Windows.Forms.Panel pnlVisualizar;
     }
 }
 

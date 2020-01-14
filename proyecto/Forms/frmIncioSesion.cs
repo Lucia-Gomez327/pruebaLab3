@@ -27,8 +27,7 @@ namespace proyecto
         Models.Employer oEmpleador;
         Models.Person oPerson;
         static bool cod;
-        ToolTip tp1;
-
+        
 
         // Contructor
         public frmIncioSesion()
@@ -39,8 +38,6 @@ namespace proyecto
         //LOAD FORMULARIO
         private void Form1_Load(object sender, EventArgs e)
         {
-            tp1 = new System.Windows.Forms.ToolTip();
-            tp1.SetToolTip(pnlVisualizar, "Ver Clave");
             ucInicio.Visible = false;
             tbNombreUsuario.Focus();           
             tbClave.PasswordChar = '*';
@@ -48,7 +45,8 @@ namespace proyecto
             tbClave.Text = "123";
             tbNombreUsuario.Text = "lucia";
             cbTipoUsuario.Text = "Empleador";
-            
+            oEmpleado = new Models.Employee();
+            oEmpleador = new Models.Employer();
 
 
         }
@@ -63,13 +61,12 @@ namespace proyecto
         private int searchPerson(string userName)
         {
             oPerson = new Models.Person();
-            oEmpleado = new Models.Employee();
-            oEmpleador = new Models.Employer();
+           
             dbContext = new Models.ProyectoLab3Entities();
             try
             {
-                oEmpleado = BuscarEmpleado(userName);
-                oEmpleador = BuscarEmpleador(userName);
+                BuscarEmpleado(userName);
+                 BuscarEmpleador(userName);
 
                 if (oEmpleador != null) // empleador
                 {
@@ -103,7 +100,7 @@ namespace proyecto
             dbContext = new Models.ProyectoLab3Entities();
             try {
                 
-                oEmpleador = BuscarEmpleador(nomUsuario);
+                 BuscarEmpleador(nomUsuario);
 
                 if (oEmpleador != null)
                 {
@@ -130,7 +127,7 @@ namespace proyecto
         }
 
       
-        private Models.Employer BuscarEmpleador(string nomUsuario)
+        private void BuscarEmpleador(string nomUsuario)
         {
             try { 
             dbContext = new Models.ProyectoLab3Entities();
@@ -138,13 +135,13 @@ namespace proyecto
                 var varEmpleador = from Employer in dbContext.Employers select Employer;
                 oEmpleador = varEmpleador.ToList().Find(x => x.userName == nomUsuario);
 
-                return oEmpleador;
+                
             }
-            catch(IOException ex) { return null; }
+            catch(IOException ex) {  oEmpleador = null; }
         }
         
 
-        private Models.Employee BuscarEmpleado(string nomUsuario)
+        private void BuscarEmpleado(string nomUsuario)
         {
             try
             {
@@ -152,17 +149,17 @@ namespace proyecto
                 oEmpleado = null;                              
                 var varEmpleado = from Employees in dbContext.Employees select Employees;              
                 oEmpleado = varEmpleado.ToList().Find(x => x.userName == nomUsuario);              
-                return oEmpleado;
+               
             }
-            catch (IOException EX) { return null; }
+            catch (IOException EX) { oEmpleado = null; }
 
         }
         private int verficarEmpleado(string nomUsuario, string clave)
         {
             dbContext = new Models.ProyectoLab3Entities();
             try {
-                // oEmpleado = dbContext.Employees.Where(x => x.userName == nomUsuario).First();
-                oEmpleado = BuscarEmpleado(nomUsuario);
+                
+                BuscarEmpleado(nomUsuario);
             if (oEmpleado != null)
             {
                 if (clave == oEmpleado.password)
@@ -273,19 +270,6 @@ namespace proyecto
         private void ucInicio_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void pnlVisualizar_MouseEnter(object sender, EventArgs e)
-        {
-            tbClave.PasswordChar = '\0';
-           
-            tp1.SetToolTip(pnlVisualizar, "Ocultar Claves");
-        }
-
-        private void pnlVisualizar_MouseLeave(object sender, EventArgs e)
-        {
-            tbClave.PasswordChar = '*';
-            tp1.SetToolTip(pnlVisualizar, "Ver Claves");
         }
     }
 }

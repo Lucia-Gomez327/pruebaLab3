@@ -33,7 +33,7 @@ namespace proyecto
         private void tbCodigoPrograma_KeyDown(object sender, KeyEventArgs e)
         {
             Models.ProyectoLab3Entities dbContext = new Models.ProyectoLab3Entities();
-           string oCode = dbContext.Codes.Find(0).key.Trim();       
+           string oCode = dbContext.Codes.Find(1).key.Trim();       
 
             if (e.KeyCode == Keys.Enter)
             {
