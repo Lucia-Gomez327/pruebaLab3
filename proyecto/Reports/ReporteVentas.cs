@@ -90,7 +90,7 @@ namespace proyecto.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_fecha1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_Date1 {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +98,7 @@ namespace proyecto.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_fecha2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_Date2 {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }

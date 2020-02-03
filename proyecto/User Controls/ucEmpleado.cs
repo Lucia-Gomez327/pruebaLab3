@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace proyecto.User_Controls
 {
@@ -17,7 +18,7 @@ namespace proyecto.User_Controls
         Models.ProyectoLab3Entities dbContext;
         Models.Person oPerson;
         Panel pnlDatos;
-        int id;
+        int id = -1;
         
         Form formulario;
         public ucEmpleado()
@@ -238,10 +239,10 @@ namespace proyecto.User_Controls
                 {
                     oPerson = new Models.Person
                     {
-                        firstName = tbApellido.Text,
-                        lastName = tbNombre.Text,
+                        firstName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbApellido.Text),
+                        lastName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbNombre.Text),
                         email = tbEmail.Text,
-                        dress = tbDireccion.Text,
+                        dress = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbDireccion.Text),
                         telephone = tbTelefono.Text,
                         sex = cboSexo.SelectedItem.ToString(),
                         documentNumber = tbNumeroDocumento.Text,
@@ -280,22 +281,82 @@ namespace proyecto.User_Controls
             frmMenu.cerrar(pnlDatos);
         }
 
-        
-        // MODIFICAR EMPLEADOS
-        public void modificarEmpleado(int ind) {
 
-            this.id = ind;
+        // MODIFICAR EMPLEADOS
+
+        public void modificarEmpleado(Models.Employee oEmployee)
+        {
+            this.oEmployee = oEmployee;
+            this.id = oEmployee.IdPerson;
+            dtpFechaIngreso.Enabled = false;
+            dtpFechaPago.Enabled = false;
+            tbSueldo.ReadOnly = true;
+            cboTipoDni.Enabled = false;
+            tbNumeroDocumento.ReadOnly = false;
+            lblAltaBajaEmpleado.Visible = false;
+            pnlAltaBaja.Visible = false;
 
             dbContext = new Models.ProyectoLab3Entities();
-            oPerson = dbContext.People.Find(ind);
-            oEmployee = dbContext.Employees.Find(ind);
+            oPerson = dbContext.People.Find(id);
+            oEmployee = dbContext.Employees.Find(id);
             lblAltaBajaEmpleado.Visible = true;
             rbAltaEmpleado.Visible = true;
             rbBajaEmpleado.Visible = true;
             btnModificar.Visible = true;
 
-            tbNombre.Text = oPerson.firstName;
-            tbApellido.Text = oPerson.lastName;
+            tbNombre.Text = oPerson.lastName;
+            tbApellido.Text = oPerson.firstName;
+            cboSexo.SelectedItem = oPerson.sex;
+            cboTipoDni.SelectedItem = oPerson.type;
+            tbNumeroDocumento.Text = oPerson.documentNumber;
+            tbUserName.Text = oEmployee.userName;
+            tbClaveNuevo.Text = oEmployee.password;
+            tbConfirmarClave.Text = oEmployee.password;
+            tbEmail.Text = oPerson.email;
+            tbDireccion.Text = oPerson.dress;
+            tbTelefono.Text = oPerson.telephone;
+            dtpFechaIngreso.Value = oEmployee.hireDate.Value;
+            dtpFechaPago.Value = oEmployee.payDate.Value;
+            tbSueldo.Text = Convert.ToString(oEmployee.salary);
+
+            if (oPerson.state == 1)
+            {
+                rbAltaEmpleado.Checked = true;
+            }
+            else
+            {
+                rbBajaEmpleado.Checked = true;
+            }
+
+
+        }
+
+        public void modificarEmpleado(int ind) {
+
+            this.id = ind;
+            tbNombre.ReadOnly = true;
+            tbApellido.ReadOnly = true;
+            tbClaveNuevo.ReadOnly = true;
+            tbConfirmarClave.ReadOnly = true;
+            tbDireccion.ReadOnly = true;
+            tbEmail.ReadOnly = true;
+            tbNumeroDocumento.ReadOnly = true;
+            tbUserName.ReadOnly = true;
+            tbTelefono.ReadOnly = true;
+            cboSexo.Enabled = false;
+            cboTipoDni.Enabled = false;
+            dtpFechaIngreso.Enabled = false;
+
+            dbContext = new Models.ProyectoLab3Entities();
+            oPerson = dbContext.People.Find(id);
+            oEmployee = dbContext.Employees.Find(id);
+            lblAltaBajaEmpleado.Visible = true;
+            rbAltaEmpleado.Visible = true;
+            rbBajaEmpleado.Visible = true;
+            btnModificar.Visible = true;
+
+            tbNombre.Text = oPerson.lastName;
+            tbApellido.Text = oPerson.firstName;
             cboSexo.SelectedItem = oPerson.sex;
             cboTipoDni.SelectedItem = oPerson.type;
             tbNumeroDocumento.Text = oPerson.documentNumber;
@@ -323,21 +384,22 @@ namespace proyecto.User_Controls
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(tbClaveNuevo.Text, " ", MessageBoxButtons.OK);
             dbContext = new Models.ProyectoLab3Entities();
             oPerson = new Models.Person();
             oEmployee = new Models.Employee();
 
             oPerson = dbContext.People.Find(id);
             oEmployee = dbContext.Employees.Find(id);
-
-            oPerson.firstName = tbNombre.Text;
-            oPerson.lastName = tbApellido.Text;
+            
+            oPerson.firstName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbNombre.Text);
+            oPerson.lastName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbApellido.Text);
             oPerson.sex = cboSexo.SelectedItem.ToString();
             oPerson.type = cboTipoDni.SelectedItem.ToString();
             oPerson.documentNumber = tbNumeroDocumento.Text;
             oEmployee.password = tbClaveNuevo.Text;            
             oPerson.email = tbEmail.Text;
-            oPerson.dress = tbDireccion.Text;
+            oPerson.dress = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbDireccion.Text);
             oPerson.telephone = tbTelefono.Text;
             oEmployee.hireDate = dtpFechaIngreso.Value;
             oEmployee.payDate = dtpFechaPago.Value;
@@ -351,15 +413,25 @@ namespace proyecto.User_Controls
                 oPerson.state = 0;
             }
 
-            dbContext.Entry(oEmployee).State = System.Data.Entity.EntityState.Modified;
-            dbContext.Entry(oPerson).State = System.Data.Entity.EntityState.Modified;
-            dbContext.SaveChanges();
-            MessageBox.Show("Empleado Modificado", "", MessageBoxButtons.OK);
+            if (verficacionClaves(tbClaveNuevo.Text, tbConfirmarClave.Text) == false) // verifica claves iguales
+            {
+                MessageBox.Show("Las claves no coinciden", " ", MessageBoxButtons.OK);
+                tbConfirmarClave.Focus();
+            }
+            else
+            {
+                dbContext.Entry(oEmployee).State = System.Data.Entity.EntityState.Modified;
+                dbContext.Entry(oPerson).State = System.Data.Entity.EntityState.Modified;
+                dbContext.SaveChanges();
+                MessageBox.Show("Empleado Modificado", "", MessageBoxButtons.OK);
+            }
+
+           
         }
 
         private void ucEmpleado_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

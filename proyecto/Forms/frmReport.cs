@@ -24,8 +24,9 @@ namespace proyecto.Forms
 
         private void frmReport_Load(object sender, EventArgs e)
         {
-            reporte.SetParameterValue("@fecha1", fechaIni);
-            reporte.SetParameterValue("@fecha2", fechaFin);
+            
+            reporte.SetParameterValue("@Date1", fechaIni);
+            reporte.SetParameterValue("@Date2", fechaFin);
             crystalReportViewer1.ReportSource = reporte;
         }
     }

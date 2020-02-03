@@ -15,12 +15,7 @@ namespace proyecto
     public partial class frmIncioSesion : Form
     {
         // Variables   
-        List <clsEmpleador> listaEmpleadores;
-        List<clsEmpleado> listaEmpleado;
-        clsEmpleado empleado;
-        clsEmpleador empleador;
-        clsPersona usuario;
-        
+
 
         Models.ProyectoLab3Entities dbContext;      
         Models.Employee oEmpleado;
@@ -60,7 +55,7 @@ namespace proyecto
 
         private int searchPerson(string userName)
         {
-            oPerson = new Models.Person();
+           // oPerson = new Models.Person();
            
             dbContext = new Models.ProyectoLab3Entities();
             try

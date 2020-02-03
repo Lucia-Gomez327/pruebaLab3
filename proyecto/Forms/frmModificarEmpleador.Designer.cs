@@ -261,7 +261,7 @@
             // 
             // tbNombre
             // 
-            this.tbNombre.Location = new System.Drawing.Point(259, 28);
+            this.tbNombre.Location = new System.Drawing.Point(259, 26);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(245, 22);
             this.tbNombre.TabIndex = 43;
@@ -380,7 +380,6 @@
             this.tbClave.Size = new System.Drawing.Size(245, 24);
             this.tbClave.TabIndex = 50;
             this.tbClave.Click += new System.EventHandler(this.tbClaveNuevo_Click);
-            
             // 
             // tbNombreUsuario
             // 
@@ -428,6 +427,7 @@
             this.pnlEmpleador.Name = "pnlEmpleador";
             this.pnlEmpleador.Size = new System.Drawing.Size(555, 437);
             this.pnlEmpleador.TabIndex = 77;
+            this.pnlEmpleador.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlEmpleador_Paint);
             // 
             // btnModificar
             // 
@@ -452,10 +452,8 @@
             this.pnlVisualizar.Name = "pnlVisualizar";
             this.pnlVisualizar.Size = new System.Drawing.Size(27, 33);
             this.pnlVisualizar.TabIndex = 77;
-            
             this.pnlVisualizar.MouseEnter += new System.EventHandler(this.pnlVisualizar_MouseEnter);
             this.pnlVisualizar.MouseLeave += new System.EventHandler(this.pnlVisualizar_MouseLeave);
-            
             // 
             // pnlClave
             // 
@@ -569,7 +567,7 @@
             this.tbClaveActual.Name = "tbClaveActual";
             this.tbClaveActual.Size = new System.Drawing.Size(245, 24);
             this.tbClaveActual.TabIndex = 1;
-            this.tbClaveActual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbClaveActual_KeyPress);
+            this.tbClaveActual.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbClaveActual_KeyUp);
             // 
             // label10
             // 

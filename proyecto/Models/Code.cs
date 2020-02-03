@@ -22,6 +22,8 @@ public partial class Code
 
     public string key { get; set; }
 
+    public int key_sales { get; set; }
+
 }
 
 }

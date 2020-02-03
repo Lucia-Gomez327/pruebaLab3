@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlMostrarDatos = new System.Windows.Forms.Panel();
             this.pnlMostrarDatosEmpleado = new System.Windows.Forms.Panel();
@@ -78,6 +78,7 @@
             this.pnlEmpleadosEmpleador = new System.Windows.Forms.Panel();
             this.pnlDatosEmpleador = new System.Windows.Forms.Panel();
             this.pnlMenu1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnCerrarCesion = new System.Windows.Forms.Button();
             this.pnlVentas = new System.Windows.Forms.Panel();
             this.pnlProductos = new System.Windows.Forms.Panel();
@@ -86,7 +87,6 @@
             this.pnlEmpleador = new System.Windows.Forms.Panel();
             this.pnlEmpleadoMenu = new System.Windows.Forms.Panel();
             this.pnlDatosEmpleado = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlMostrarDatos.SuspendLayout();
             this.pnlMostrarDatosEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -172,14 +172,14 @@
             this.dgvDatos.BackgroundColor = System.Drawing.Color.Gold;
             this.dgvDatos.ColumnHeadersHeight = 29;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.Location = new System.Drawing.Point(132, 90);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersWidth = 51;
@@ -196,6 +196,7 @@
             this.tbBuscar.Size = new System.Drawing.Size(228, 22);
             this.tbBuscar.TabIndex = 7;
             this.tbBuscar.TextChanged += new System.EventHandler(this.tbBuscar_TextChanged);
+            this.tbBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbBuscar_KeyUp);
             // 
             // pnlBuscar
             // 
@@ -351,7 +352,7 @@
             this.pnlFiltro.Controls.Add(this.gbFecha);
             this.pnlFiltro.Controls.Add(this.comboBox1);
             this.pnlFiltro.Controls.Add(this.lblBuscarCodigo);
-            this.pnlFiltro.Location = new System.Drawing.Point(485, 226);
+            this.pnlFiltro.Location = new System.Drawing.Point(87, 278);
             this.pnlFiltro.Name = "pnlFiltro";
             this.pnlFiltro.Size = new System.Drawing.Size(453, 536);
             this.pnlFiltro.TabIndex = 71;
@@ -601,7 +602,7 @@
             this.pnlMostrarDatosEmpleador.Controls.Add(this.btnVolverInicio);
             this.pnlMostrarDatosEmpleador.Controls.Add(this.ucDatosEmpleador1);
             this.pnlMostrarDatosEmpleador.Controls.Add(this.lblTitulo);
-            this.pnlMostrarDatosEmpleador.Location = new System.Drawing.Point(419, 269);
+            this.pnlMostrarDatosEmpleador.Location = new System.Drawing.Point(841, 204);
             this.pnlMostrarDatosEmpleador.Name = "pnlMostrarDatosEmpleador";
             this.pnlMostrarDatosEmpleador.Size = new System.Drawing.Size(593, 546);
             this.pnlMostrarDatosEmpleador.TabIndex = 3;
@@ -693,6 +694,16 @@
             this.pnlMenu1.Name = "pnlMenu1";
             this.pnlMenu1.Size = new System.Drawing.Size(1347, 109);
             this.pnlMenu1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(848, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnCerrarCesion
             // 
@@ -793,16 +804,6 @@
             this.pnlDatosEmpleado.Size = new System.Drawing.Size(73, 63);
             this.pnlDatosEmpleado.TabIndex = 0;
             this.pnlDatosEmpleado.Click += new System.EventHandler(this.pnlDatosEmpleado_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(848, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMenu
             // 

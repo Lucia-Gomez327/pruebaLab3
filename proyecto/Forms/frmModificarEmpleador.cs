@@ -22,6 +22,8 @@ namespace proyecto.Forms
             this.oEmployer = dbContext.Employers.Find(id);
         }
         //LOAD
+
+       
         private void frmModificarEmpleador_Load(object sender, EventArgs e)
         {
             tp1 = new System.Windows.Forms.ToolTip();
@@ -30,21 +32,21 @@ namespace proyecto.Forms
             tp1.SetToolTip(pnlVisualizar, "Ver Clave");           
             pnlClave.Visible = false;
             tbClave.ReadOnly = true;
-            tbApellido.Text = oPerson.firstName;
-            tbNombre.Text = oPerson.lastName;
-            cboTipoDni.SelectedItem = oPerson.type;
-            tbNumeroDocumento.Text = oPerson.documentNumber;
-            cbSexo.SelectedItem = oPerson.sex;
+            tbApellido.Text = oPerson.firstName.Trim();
+            tbNombre.Text = oPerson.lastName.Trim();
+            cboTipoDni.SelectedItem = oPerson.type.Trim();
+            tbNumeroDocumento.Text = oPerson.documentNumber.Trim();
+            cbSexo.SelectedItem = oPerson.sex.Trim();
             
 
             oEmployer = BuscarEmpleador(oPerson.idPerson);
 
-            tbNombreUsuario.Text = oEmployer.userName;
-            tbClave.Text = oEmployer.password;
+            tbNombreUsuario.Text = oEmployer.userName.Trim();
+            tbClave.Text = oEmployer.password.Trim();
 
-            tbEmail.Text = oPerson.email;
-            tbDireccion.Text = oPerson.dress;
-            tbTelefono.Text = oPerson.telephone;
+            tbEmail.Text = oPerson.email.Trim();
+            tbDireccion.Text = oPerson.dress.Trim();
+            tbTelefono.Text = oPerson.telephone.Trim();
 
             lblClaveIncorrecta.Visible = false;
             lblClaveNoCoincide.Visible = false;
@@ -133,8 +135,7 @@ namespace proyecto.Forms
             }
         }
 
-     
-
+    
         private void tbClaveNuevo_Click(object sender, EventArgs e)
         {
            
@@ -162,23 +163,6 @@ namespace proyecto.Forms
                 
             }
 
-            
-        }
-
-       
-
-        private void tbClaveActual_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-                if (oEmployer.password != tbClaveActual.Text)
-                {
-                    lblClaveIncorrecta.Visible = true;
-
-                }
-                else
-                {
-                    lblClaveIncorrecta.Visible = false;
-                }
             
         }
 
@@ -259,7 +243,7 @@ namespace proyecto.Forms
         {
             
                 tbClaveNueva.PasswordChar = '\0';
-                tbConfirmacionClave.PasswordChar = '\0';
+                //tbConfirmacionClave.PasswordChar = '\0';
                tp1.SetToolTip(pnlVisualizar, "Ocultar Claves");
             
         }
@@ -267,7 +251,7 @@ namespace proyecto.Forms
         private void pnlVisualizar_MouseLeave(object sender, EventArgs e)
         {
             tbClaveNueva.PasswordChar = '*';
-            tbConfirmacionClave.PasswordChar = '*';
+            //tbConfirmacionClave.PasswordChar = '*';
             tp1.SetToolTip(pnlVisualizar, "Ver Claves");
         }
 
@@ -281,6 +265,24 @@ namespace proyecto.Forms
             {
                 lblClaveNoCoincide.Visible = false;
             }
+        }
+
+        private void TbClaveActual_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (oEmployer.password != tbClaveActual.Text)
+            {
+                lblClaveIncorrecta.Visible = true;
+
+            }
+            else
+            {
+                lblClaveIncorrecta.Visible = false;
+            }
+        }
+
+        private void PnlEmpleador_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

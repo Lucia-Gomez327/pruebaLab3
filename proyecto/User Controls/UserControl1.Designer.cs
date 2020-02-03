@@ -45,7 +45,7 @@
             this.lblDni = new System.Windows.Forms.Label();
             this.lblDireccion = new System.Windows.Forms.Label();
             this.tbDireccion = new System.Windows.Forms.TextBox();
-            this.cbSexo = new System.Windows.Forms.ComboBox();
+            this.cboSexo = new System.Windows.Forms.ComboBox();
             this.lblSexo = new System.Windows.Forms.Label();
             this.lblConfirmarClave = new System.Windows.Forms.Label();
             this.tbConfirmacionClave = new System.Windows.Forms.TextBox();
@@ -87,7 +87,7 @@
             this.pnlRegistrarse.Controls.Add(this.lblDni);
             this.pnlRegistrarse.Controls.Add(this.lblDireccion);
             this.pnlRegistrarse.Controls.Add(this.tbDireccion);
-            this.pnlRegistrarse.Controls.Add(this.cbSexo);
+            this.pnlRegistrarse.Controls.Add(this.cboSexo);
             this.pnlRegistrarse.Controls.Add(this.lblSexo);
             this.pnlRegistrarse.Controls.Add(this.lblConfirmarClave);
             this.pnlRegistrarse.Controls.Add(this.tbConfirmacionClave);
@@ -276,16 +276,16 @@
             this.tbDireccion.Size = new System.Drawing.Size(245, 22);
             this.tbDireccion.TabIndex = 10;
             // 
-            // cbSexo
+            // cboSexo
             // 
-            this.cbSexo.FormattingEnabled = true;
-            this.cbSexo.Items.AddRange(new object[] {
+            this.cboSexo.FormattingEnabled = true;
+            this.cboSexo.Items.AddRange(new object[] {
             "Femenino",
             "Masculino"});
-            this.cbSexo.Location = new System.Drawing.Point(242, 107);
-            this.cbSexo.Name = "cbSexo";
-            this.cbSexo.Size = new System.Drawing.Size(245, 24);
-            this.cbSexo.TabIndex = 5;
+            this.cboSexo.Location = new System.Drawing.Point(242, 107);
+            this.cboSexo.Name = "cboSexo";
+            this.cboSexo.Size = new System.Drawing.Size(245, 24);
+            this.cboSexo.TabIndex = 5;
             // 
             // lblSexo
             // 
@@ -497,7 +497,7 @@
         private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.TextBox tbDireccion;
-        private System.Windows.Forms.ComboBox cbSexo;
+        private System.Windows.Forms.ComboBox cboSexo;
         private System.Windows.Forms.Label lblSexo;
         private System.Windows.Forms.Label lblConfirmarClave;
         private System.Windows.Forms.TextBox tbConfirmacionClave;

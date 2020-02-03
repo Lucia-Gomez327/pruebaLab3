@@ -29,6 +29,14 @@ namespace proyecto
             
         }
         // constructor 1
+
+        public frmAgregarEmpleado(Models.Employee oEmployee)
+        {
+            InitializeComponent();
+            dbContext = new Models.ProyectoLab3Entities();
+            this.oEmployee = oEmployee;
+            ucEmpleado1.modificarEmpleado(oEmployee);
+        }
         public frmAgregarEmpleado(int ind)
         {
             InitializeComponent();

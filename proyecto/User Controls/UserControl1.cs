@@ -33,6 +33,7 @@ namespace proyecto
             InitializeComponent();
             tbClaveNuevo.PasswordChar = '*';
             tbConfirmacionClave.PasswordChar = '*';
+            
 
         }
 
@@ -52,13 +53,14 @@ namespace proyecto
         {
             this.oEmpleador = oEmpleador;
             this.oPerson = oPerson;
-
+            
             tbNombre.Text = new CultureInfo("en-US", false).TextInfo.ToTitleCase(oPerson.lastName);
             tbApellido.Text = oPerson.firstName;
-            cbSexo.SelectedItem = oPerson.sex.Trim();
+            cboSexo.SelectedItem = oPerson.sex.Trim();
             cboTipoDni.SelectedItem = oPerson.type.Trim();
             tbNumeroDocumento.Text = oPerson.documentNumber;
             tbNombreUsuarioNuevo.Text = oEmpleador.userName;
+            
             tbEmail.Text = oPerson.email;
             if (oPerson.dress.Trim() != "")
             {
@@ -74,6 +76,7 @@ namespace proyecto
             {
                 eliminarElementos(control);
             }
+            
         }
 
 
@@ -90,7 +93,10 @@ namespace proyecto
         {
             foreach (Control oControls in control.Controls)
             {
-
+                if(oControls is TextBox)
+                {
+                    ((TextBox)oControls).Text.Trim();
+                }
                 if (oControls is Label)
                 {
                     if (((Label)oControls).Text == "*" || ((Label)oControls).Name == "lblCamposObligatorios")
@@ -138,6 +144,23 @@ namespace proyecto
                 }
                 else
                 { eliminarElementos(oControls); }
+            }
+        }
+
+        private void Trim(Control o)
+        {
+
+            foreach (Control x in o.Controls)
+            {
+                if (x is TextBox)
+                {
+                    ((TextBox)x).Text.Trim();
+
+                }
+                else
+                {
+                    Trim(x);
+                }
             }
         }
         public bool textBoxVacio()
@@ -205,7 +228,7 @@ namespace proyecto
         }
         private bool controlesVacios()
         {
-            if (tbNombre.Text == string.Empty || tbApellido.Text == string.Empty || tbNombreUsuarioNuevo.Text == string.Empty || tbClaveNuevo.Text == string.Empty || tbConfirmacionClave.Text == string.Empty || tbEmail.Text == string.Empty || cbSexo.SelectedIndex == -1)
+            if (tbNombre.Text == string.Empty || tbApellido.Text == string.Empty || tbNombreUsuarioNuevo.Text == string.Empty || tbClaveNuevo.Text == string.Empty || tbConfirmacionClave.Text == string.Empty || tbEmail.Text == string.Empty || cboSexo.SelectedIndex == -1)
             {
                 return true;
             }
@@ -246,6 +269,7 @@ namespace proyecto
 
 
         }
+   
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             
@@ -283,7 +307,7 @@ namespace proyecto
                         email = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbEmail.Text),
                         dress = new CultureInfo("en-US", false).TextInfo.ToTitleCase(tbDireccion.Text),
                         telephone = tbTelefono.Text,
-                        sex = cbSexo.SelectedItem.ToString().Trim(),
+                        sex = cboSexo.SelectedItem.ToString().Trim(),
                         documentNumber = tbNumeroDocumento.Text,
                         state = 1,
                         type = cboTipoDni.SelectedItem.ToString().Trim()

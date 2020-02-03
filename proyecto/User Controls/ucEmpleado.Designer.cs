@@ -65,7 +65,9 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnVolverInicio = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
+            this.pnlAltaBaja = new System.Windows.Forms.Panel();
             this.pnlAgregarEmpleado.SuspendLayout();
+            this.pnlAltaBaja.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblDatos
@@ -82,15 +84,13 @@
             // 
             this.pnlAgregarEmpleado.BackColor = System.Drawing.Color.Transparent;
             this.pnlAgregarEmpleado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAgregarEmpleado.Controls.Add(this.pnlAltaBaja);
             this.pnlAgregarEmpleado.Controls.Add(this.cboTipoDni);
             this.pnlAgregarEmpleado.Controls.Add(this.lblTipoDni);
             this.pnlAgregarEmpleado.Controls.Add(this.tbNumeroDocumento);
             this.pnlAgregarEmpleado.Controls.Add(this.lblDni);
             this.pnlAgregarEmpleado.Controls.Add(this.lblConfirmarClave);
             this.pnlAgregarEmpleado.Controls.Add(this.tbConfirmarClave);
-            this.pnlAgregarEmpleado.Controls.Add(this.rbBajaEmpleado);
-            this.pnlAgregarEmpleado.Controls.Add(this.rbAltaEmpleado);
-            this.pnlAgregarEmpleado.Controls.Add(this.lblAltaBajaEmpleado);
             this.pnlAgregarEmpleado.Controls.Add(this.lblNombre);
             this.pnlAgregarEmpleado.Controls.Add(this.dtpFechaPago);
             this.pnlAgregarEmpleado.Controls.Add(this.tbClaveNuevo);
@@ -187,7 +187,7 @@
             // rbBajaEmpleado
             // 
             this.rbBajaEmpleado.AutoSize = true;
-            this.rbBajaEmpleado.Location = new System.Drawing.Point(807, 342);
+            this.rbBajaEmpleado.Location = new System.Drawing.Point(299, 21);
             this.rbBajaEmpleado.Name = "rbBajaEmpleado";
             this.rbBajaEmpleado.Size = new System.Drawing.Size(57, 21);
             this.rbBajaEmpleado.TabIndex = 62;
@@ -198,7 +198,7 @@
             // rbAltaEmpleado
             // 
             this.rbAltaEmpleado.AutoSize = true;
-            this.rbAltaEmpleado.Location = new System.Drawing.Point(691, 341);
+            this.rbAltaEmpleado.Location = new System.Drawing.Point(183, 20);
             this.rbAltaEmpleado.Name = "rbAltaEmpleado";
             this.rbAltaEmpleado.Size = new System.Drawing.Size(53, 21);
             this.rbAltaEmpleado.TabIndex = 61;
@@ -211,7 +211,7 @@
             this.lblAltaBajaEmpleado.AutoSize = true;
             this.lblAltaBajaEmpleado.BackColor = System.Drawing.Color.Transparent;
             this.lblAltaBajaEmpleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAltaBajaEmpleado.Location = new System.Drawing.Point(534, 341);
+            this.lblAltaBajaEmpleado.Location = new System.Drawing.Point(26, 20);
             this.lblAltaBajaEmpleado.Name = "lblAltaBajaEmpleado";
             this.lblAltaBajaEmpleado.Size = new System.Drawing.Size(84, 18);
             this.lblAltaBajaEmpleado.TabIndex = 60;
@@ -459,6 +459,16 @@
             this.btnCargar.UseVisualStyleBackColor = false;
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
+            // pnlAltaBaja
+            // 
+            this.pnlAltaBaja.Controls.Add(this.lblAltaBajaEmpleado);
+            this.pnlAltaBaja.Controls.Add(this.rbAltaEmpleado);
+            this.pnlAltaBaja.Controls.Add(this.rbBajaEmpleado);
+            this.pnlAltaBaja.Location = new System.Drawing.Point(513, 312);
+            this.pnlAltaBaja.Name = "pnlAltaBaja";
+            this.pnlAltaBaja.Size = new System.Drawing.Size(377, 68);
+            this.pnlAltaBaja.TabIndex = 69;
+            // 
             // ucEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -474,6 +484,8 @@
             this.Load += new System.EventHandler(this.ucEmpleado_Load);
             this.pnlAgregarEmpleado.ResumeLayout(false);
             this.pnlAgregarEmpleado.PerformLayout();
+            this.pnlAltaBaja.ResumeLayout(false);
+            this.pnlAltaBaja.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -516,5 +528,6 @@
         private System.Windows.Forms.Label lblTipoDni;
         private System.Windows.Forms.TextBox tbNumeroDocumento;
         private System.Windows.Forms.Label lblDni;
+        private System.Windows.Forms.Panel pnlAltaBaja;
     }
 }

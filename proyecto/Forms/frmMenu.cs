@@ -16,12 +16,13 @@ namespace proyecto
         frmAgregarVenta agregarVenta;
         frmAgregarProductos agregarProductos;
         proyecto.Forms.frmVentas frmVentas;
-        
+
 
 
         int indice;
         int panelBusqueda;
         int indiceDGV;
+        int alta_baja = 0;
 
         Models.ProyectoLab3Entities dbContext;
         Models.Employee oEmpleado = new Models.Employee();
@@ -220,7 +221,7 @@ namespace proyecto
                                  from Prod in dbContext.Products
                                  from Cliente in dbContext.Clients
                                  from Person in dbContext.People
-                                 where Sale.idProduct == Prod.idProduct && Sale.idPerson == Person.idPerson && Sale.idClient == Cliente.idPerson && Sale.state == 1
+                                 where Sale.idPerson == Person.idPerson && Sale.idClient == Cliente.idPerson && Sale.state == 1
                                  orderby Sale.saleNumber
                                  select new
                                  {
@@ -228,6 +229,7 @@ namespace proyecto
                                      Sale.saleNumber,
                                      Vendedor = Person.firstName,
                                      Cliente = Cliente.Person.firstName,
+                                     NDocumento = Cliente.Person.documentNumber,
                                      Fecha = Sale.saleDate,
                                      Total = Sale.summary,
                                      Sale.state
@@ -238,14 +240,14 @@ namespace proyecto
 
 
 
-                    ArrayList lista = new ArrayList();
+
 
                     dgvDatos.DataSource = sales.ToList();
                     dgvDatos.Columns[0].Visible = false;
                     dgvDatos.Columns[1].HeaderText = "N° Factura";
-                    dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
-                    dgvDatos.Columns[5].DefaultCellStyle.Format = "$##,#0.00";
-                    dgvDatos.Columns[6].Visible = false;
+                    dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                    dgvDatos.Columns[6].DefaultCellStyle.Format = "$##,#0.00";
+                    dgvDatos.Columns[7].Visible = false;
                     break;
                 case 4: //productos
 
@@ -418,15 +420,14 @@ namespace proyecto
         private void pnlListarBajaEmpleado_Click(object sender, EventArgs e)
         {
             panelBusqueda = 1;
+            alta_baja = 1;
             listarBajas();
-
-
-
         }
 
         private void pnlListarAltaEmpleado_Click(object sender, EventArgs e)
         {
             listarAltas();
+            alta_baja = 0;
             buscar();
         }
 
@@ -505,7 +506,9 @@ namespace proyecto
         private void pnlDatosEmpleado_Click(object sender, EventArgs e)
         {
             pnlEmpleadoMenu.Visible = false;
-            pnlMostrarDatosEmpleado.Visible = true;
+            // pnlMostrarDatosEmpleado.Visible = true;
+            agregarEmpleado = new frmAgregarEmpleado(oEmpleado);
+            agregarEmpleado.ShowDialog();
             pnlEmpleadoMenu.Visible = false;
             //ucEmpleado1.Visible = true;
 
@@ -555,9 +558,9 @@ namespace proyecto
             lblDatos.Text = "REGISTRO VENTAS";
 
 
-            pnlBuscar.Visible = false;
+            // pnlBuscar.Visible = false;
             pnlFiltrar.Visible = true;
-            tbBuscar.Visible = false;
+            //tbBuscar.Visible = false;
 
 
             pnlEmpleadoMenu.Visible = false;
@@ -678,15 +681,282 @@ namespace proyecto
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DateTime fi = new DateTime(2019, 12, 18);
-            DateTime ff = new DateTime(2019, 12, 19);
+            DateTime fi = new DateTime(2020, 1, 29);
+            DateTime ff = new DateTime(2020, 1, 31);
             Forms.frmReport reporte = new Forms.frmReport();
             reporte.fechaIni = fi;
             reporte.fechaFin = ff;
             reporte.Show();
         }
+
+        private void TbBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (alta_baja == 0)
+            {
+                switch (click)
+                {
+                    case 1: //Empleados                  
+                        dgvDatos.DataSource = (from Personas in dbContext.People
+                                               from Empleados in dbContext.Employees
+                                               where Personas.idPerson == Empleados.IdPerson && Personas.state == 1 &&
+                                               (Personas.documentNumber.Contains(tbBuscar.Text) ||
+
+                                               (((Personas.lastName.Trim() + " " + Personas.firstName.Trim()).Contains(tbBuscar.Text))) || (Personas.firstName.Trim() + " " + Personas.lastName.Trim()).Contains(tbBuscar.Text))
+                                               orderby Personas.documentNumber
+                                               select new
+                                               {
+                                                   Personas.idPerson,
+                                                   Apellido = Personas.firstName,
+                                                   Nombre = Personas.lastName,
+                                                   Sexo = Personas.sex,
+                                                   Personas.type,
+                                                   Personas.documentNumber,
+                                                   Dirección = Personas.dress,
+                                                   Email = Personas.email,
+                                                   Telefono = Personas.telephone,
+                                                   Usuario = Empleados.userName,
+                                                   Sueldo = Empleados.salary,
+                                                   Personas.state,
+
+                                               }).ToList();
+                        dgvDatos.Columns[3].HeaderText = "Tipo Documento";
+                        dgvDatos.Columns[3].Width = 150;
+                        dgvDatos.Columns[4].HeaderText = "Numero Documento";
+                        dgvDatos.Columns[4].Width = 150;
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].Width = 150;
+                        dgvDatos.Columns[6].Width = 150;
+                        dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[9].DefaultCellStyle.Format = "$##,#0.00";
+                        dgvDatos.Columns[10].Visible = false;
+                        break;
+
+                    case 2://Clientes
+
+                        dgvDatos.DataSource = (from Personas in dbContext.People
+                                               from Clientes in dbContext.Clients
+                                               where Personas.idPerson == Clientes.idPerson && Personas.state == 1 &&
+                                               (Personas.documentNumber.Contains(tbBuscar.Text) ||
+
+                                               (((Personas.lastName.Trim() + " " + Personas.firstName.Trim()).Contains(tbBuscar.Text))) || (Personas.firstName.Trim() + " " + Personas.lastName.Trim()).Contains(tbBuscar.Text))
+                                               orderby Personas.documentNumber
+                                               select new
+                                               {
+                                                   Personas.idPerson,
+                                                   Apellido = Personas.firstName,
+                                                   Nombre = Personas.lastName,
+                                                   Sexo = Personas.sex,
+                                                   Personas.type,
+                                                   Personas.documentNumber,
+                                                   Dirección = Personas.dress,
+                                                   Email = Personas.email,
+                                                   Telefono = Personas.telephone,
+                                                   Personas.state,
+
+                                               }).ToList();
+
+                        dgvDatos.Columns[0].Visible = false;
+                        dgvDatos.Columns[4].HeaderText = "Tipo Documento";
+                        dgvDatos.Columns[4].Width = 150;
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].HeaderText = "Numero Documento";
+                        dgvDatos.Columns[5].Width = 150;
+                        dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[6].Width = 150;
+                        dgvDatos.Columns[7].Width = 150;
+                        dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        break;
+                    case 3://Ventas
+                        dgvDatos.DataSource = (from Sale in dbContext.Sales
+                                               from Prod in dbContext.Products
+                                               from Cliente in dbContext.Clients
+                                               from Person in dbContext.People
+                                               where Sale.idPerson == Person.idPerson && Sale.idClient == Cliente.idPerson && Sale.state == 1
+                                               && (Person.firstName.Contains(tbBuscar.Text) || Cliente.Person.documentNumber.Contains(tbBuscar.Text) || Sale.saleNumber.Contains(tbBuscar.Text))
+                                               orderby Sale.saleNumber
+                                               select new
+                                               {
+                                                   Sale.IdSale,
+                                                   Sale.saleNumber,
+                                                   Vendedor = Person.firstName,
+                                                   Cliente = Cliente.Person.firstName,
+                                                   DVendedor = Cliente.Person.documentNumber,
+                                                   Fecha = Sale.saleDate,
+                                                   Total = Sale.summary,
+                                                   Sale.state
+
+
+
+                                               }).Distinct().OrderBy(x => x.saleNumber).ToList();
+
+                        dgvDatos.Columns[0].Visible = false;
+                        dgvDatos.Columns[1].HeaderText = "N° Factura";
+                        dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[6].DefaultCellStyle.Format = "$##,#0.00";
+                        dgvDatos.Columns[7].Visible = false;
+                        break;
+                    case 4://Productos
+
+                        dgvDatos.DataSource = (from Productos in dbContext.Products
+                                               where Productos.state == 1 &&
+                                               (Productos.barcode.ToString().Contains(tbBuscar.Text) || Productos.categorie.Contains(tbBuscar.Text)
+                                               || Productos.description.Contains(tbBuscar.Text) || Productos.idProduct.ToString().Contains(tbBuscar.Text))
+                                               orderby Productos.categorie
+                                               select new
+                                               {
+                                                   Productos.idProduct,
+                                                   Productos.barcode,
+                                                   Categoria = Productos.categorie,
+                                                   Descripción = Productos.description,
+                                                   Cantidad = Productos.cant,
+                                                   Precio = Productos.price,
+
+                                               }).ToList();
+
+                        dgvDatos.Columns[1].HeaderText = "Codigo de barras";
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].DefaultCellStyle.Format = "$##,#0.00";
+                        //dgvDatos.Columns[6].Visible = false;
+                        break;
+                }
+            }
+            else
+            {
+                switch (click)
+                {
+                    case 1: //Empleados                  
+                        dgvDatos.DataSource = (from Personas in dbContext.People
+                                               from Empleados in dbContext.Employees
+                                               where Personas.idPerson == Empleados.IdPerson && Personas.state == 0 &&
+                                               (Personas.documentNumber.Contains(tbBuscar.Text) ||
+
+                                               (((Personas.lastName.Trim() + " " + Personas.firstName.Trim()).Contains(tbBuscar.Text))) || (Personas.firstName.Trim() + " " + Personas.lastName.Trim()).Contains(tbBuscar.Text))
+                                               orderby Personas.documentNumber
+                                               select new
+                                               {
+                                                   Personas.idPerson,
+                                                   Apellido = Personas.firstName,
+                                                   Nombre = Personas.lastName,
+                                                   Sexo = Personas.sex,
+                                                   Personas.type,
+                                                   Personas.documentNumber,
+                                                   Dirección = Personas.dress,
+                                                   Email = Personas.email,
+                                                   Telefono = Personas.telephone,
+                                                   Usuario = Empleados.userName,
+                                                   Sueldo = Empleados.salary,
+                                                   Personas.state,
+
+                                               }).ToList();
+                        dgvDatos.Columns[3].HeaderText = "Tipo Documento";
+                        dgvDatos.Columns[3].Width = 150;
+                        dgvDatos.Columns[4].HeaderText = "Numero Documento";
+                        dgvDatos.Columns[4].Width = 150;
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].Width = 150;
+                        dgvDatos.Columns[6].Width = 150;
+                        dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[9].DefaultCellStyle.Format = "$##,#0.00";
+                        dgvDatos.Columns[10].Visible = false;
+                        break;
+
+                    case 2://Clientes
+
+                        dgvDatos.DataSource = (from Personas in dbContext.People
+                                               from Clientes in dbContext.Clients
+                                               where Personas.idPerson == Clientes.idPerson && Personas.state == 0 &&
+                                               (Personas.documentNumber.Contains(tbBuscar.Text) ||
+
+                                               (((Personas.lastName.Trim() + " " + Personas.firstName.Trim()).Contains(tbBuscar.Text))) || (Personas.firstName.Trim() + " " + Personas.lastName.Trim()).Contains(tbBuscar.Text))
+                                               orderby Personas.documentNumber
+                                               select new
+                                               {
+                                                   Personas.idPerson,
+                                                   Apellido = Personas.firstName,
+                                                   Nombre = Personas.lastName,
+                                                   Sexo = Personas.sex,
+                                                   Personas.type,
+                                                   Personas.documentNumber,
+                                                   Dirección = Personas.dress,
+                                                   Email = Personas.email,
+                                                   Telefono = Personas.telephone,
+                                                   Personas.state,
+
+                                               }).ToList();
+
+                        dgvDatos.Columns[0].Visible = false;
+                        dgvDatos.Columns[4].HeaderText = "Tipo Documento";
+                        dgvDatos.Columns[4].Width = 150;
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].HeaderText = "Numero Documento";
+                        dgvDatos.Columns[5].Width = 150;
+                        dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[6].Width = 150;
+                        dgvDatos.Columns[7].Width = 150;
+                        dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        break;
+                    case 3://Ventas
+                        dgvDatos.DataSource = (from Sale in dbContext.Sales
+                                               from Prod in dbContext.Products
+                                               from Cliente in dbContext.Clients
+                                               from Person in dbContext.People
+                                               where Sale.idPerson == Person.idPerson && Sale.idClient == Cliente.idPerson && Sale.state == 0
+                                               && (Person.firstName.Contains(tbBuscar.Text) || Cliente.Person.documentNumber.Contains(tbBuscar.Text) || Sale.saleNumber.Contains(tbBuscar.Text))
+                                               orderby Sale.saleNumber
+                                               select new
+                                               {
+                                                   Sale.IdSale,
+                                                   Sale.saleNumber,
+                                                   Vendedor = Person.firstName,
+                                                   Cliente = Cliente.Person.firstName,
+                                                   DVendedor = Cliente.Person.documentNumber,
+                                                   Fecha = Sale.saleDate,
+                                                   Total = Sale.summary,
+                                                   Sale.state
+
+
+
+                                               }).Distinct().OrderBy(x => x.saleNumber).ToList();
+
+                        dgvDatos.Columns[0].Visible = false;
+                        dgvDatos.Columns[1].HeaderText = "N° Factura";
+                        dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[6].DefaultCellStyle.Format = "$##,#0.00";
+                        dgvDatos.Columns[7].Visible = false;
+                        break;
+                    case 4://Productos
+
+                        dgvDatos.DataSource = (from Productos in dbContext.Products
+                                               where Productos.state == 0 &&
+                                               (Productos.barcode.ToString().Contains(tbBuscar.Text) || Productos.categorie.Contains(tbBuscar.Text)
+                                               || Productos.description.Contains(tbBuscar.Text) || Productos.idProduct.ToString().Contains(tbBuscar.Text))
+                                               orderby Productos.categorie
+                                               select new
+                                               {
+                                                   Productos.idProduct,
+                                                   Productos.barcode,
+                                                   Categoria = Productos.categorie,
+                                                   Descripción = Productos.description,
+                                                   Cantidad = Productos.cant,
+                                                   Precio = Productos.price,
+
+                                               }).ToList();
+
+                        dgvDatos.Columns[1].HeaderText = "Codigo de barras";
+                        dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                        dgvDatos.Columns[5].DefaultCellStyle.Format = "$##,#0.00";
+                        //dgvDatos.Columns[6].Visible = false;
+                        break;
+
+                }
+
+            }
+        }
+
     }
-
-
 }
 

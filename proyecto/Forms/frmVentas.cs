@@ -22,6 +22,7 @@ namespace proyecto.Forms
         Models.Product oProduct;
         Models.Sale oSale;
         Models.SaleProduct oSaleProduct;
+        Models.Code Code_sales;
         List<Models.Product> listProducts;
         int idSelected;
         int indic;
@@ -78,6 +79,10 @@ namespace proyecto.Forms
 
 
             dgvClientes.Columns[6].Visible = false;
+            Code_sales = dbContext.Codes.Find(1);
+            
+            Code_sales.key_sales = Code_sales.key_sales+1;
+            tbCodigo.Text = DateTime.Now.Year.ToString() + "-" + Code_sales.key_sales.ToString();
 
             autoComplete();
             fillCb();
@@ -162,12 +167,12 @@ namespace proyecto.Forms
 
                 if (oEmployer != null) // empleador
                 {
-                    tbNombreVendedor.Text = oEmployer.userName.Trim();
+                    tbNombreVendedor.Text = oEmployer.idPerson.ToString();
                     return true;
                 }
                 else
                 { //empleado
-                    tbNombreVendedor.Text = oEmployee.userName;
+                    tbNombreVendedor.Text = oEmployee.IdPerson.ToString();
                     return true;
                 }
             }
@@ -205,7 +210,10 @@ namespace proyecto.Forms
 
         private void pnlEliminarProducto_Click(object sender, EventArgs e)
         {
+            tbTotalVenta.Text = (Convert.ToDecimal(tbTotalVenta.Text) - Convert.ToDecimal(dgvProductos.Rows[dgvProductos.CurrentRow.Index].Cells["Importe"].Value)).ToString();
             dgvProductos.Rows.RemoveAt(dgvProductos.CurrentRow.Index);
+            
+           
         }
 
         private void tbFiltrar_KeyUp(object sender, KeyEventArgs e)
@@ -353,7 +361,7 @@ namespace proyecto.Forms
                         summary = Convert.ToDecimal(tbTotalVenta.Text),
                         saleDate = Convert.ToDateTime(lblFecha.Text),
                         state = 1,
-                        saleNumber = "0"
+                        saleNumber = tbCodigo.Text
                     };
 
                     dbContext.Sales.Add(oSale);
@@ -381,7 +389,7 @@ namespace proyecto.Forms
                                 dbContext.Entry(oProduct).State = System.Data.Entity.EntityState.Modified;
                                 dbContext.SaveChanges();
 
-                                dbContext = new Models.ProyectoLab3Entities();
+                               // dbContext = new Models.ProyectoLab3Entities();
                                 dbContext.SaleProducts.Add(oSaleProduct);
                                 dbContext.SaveChanges();
 
@@ -390,8 +398,11 @@ namespace proyecto.Forms
                         }
 
                     }
-
+                    
                     dbContext.SaveChanges();
+                    dbContext.Entry(Code_sales).State = System.Data.Entity.EntityState.Modified;
+                    dbContext.SaveChanges();
+
 
                     MessageBox.Show("Venta Cargada", "Aviso", MessageBoxButtons.OK);
                 }
@@ -405,11 +416,28 @@ namespace proyecto.Forms
                         {
                             Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
                                 ve.PropertyName, ve.ErrorMessage);
+                            MessageBox.Show("- Property: \"{0}\", Error: \"{1}\""+
+                                ve.PropertyName+ ve.ErrorMessage, "Aviso", MessageBoxButtons.OK);
                         }
                     }
                   
                 }
             }
+
+        }
+
+        private void LblSeleccion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TbNombreVendedor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PnlEliminarProducto_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

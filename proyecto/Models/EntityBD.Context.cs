@@ -47,9 +47,9 @@ public partial class ProyectoLab3Entities : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    public virtual DbSet<Sale> Sales { get; set; }
-
     public virtual DbSet<SaleProduct> SaleProducts { get; set; }
+
+    public virtual DbSet<Sale> Sales { get; set; }
 
 
     public virtual ObjectResult<reporte_ventas_Result> reporte_ventas(Nullable<System.DateTime> fecha1, Nullable<System.DateTime> fecha2)
