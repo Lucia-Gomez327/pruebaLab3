@@ -16,7 +16,7 @@ namespace proyecto.Forms
         public DateTime fechaIni;
         public DateTime fechaFin;
         /// <summary>
-        /// 123
+        /// 4
         /// </summary>
         Reports.ReporteVentas reporte = new Reports.ReporteVentas();
         public frmReport()
